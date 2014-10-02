@@ -18,7 +18,7 @@ function JournalerFactory(restServiceHandler, usecaseAdapterFactory, config) {
         var ctx = usecaseAdapterFactory({});
         ctx.params = {
             method: 'PUT',
-            url: config.baseUri + 'journal',
+            url: config.baseUri + 'api/journal',
             data: {
                 from: args.from,
                 to: 'journalist',

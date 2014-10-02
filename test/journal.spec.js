@@ -26,7 +26,7 @@ describe('journal', function() {
 
             expect(request().params).toEqual({
                 method:'PUT',
-                url: config.baseUri + 'journal',
+                url: config.baseUri + 'api/journal',
                 data: {
                     from: 'javascript.error.reporter',
                     to: 'journalist',
