@@ -8,6 +8,7 @@ describe('journal', function() {
     }
 
     beforeEach(module('journal'));
+    beforeEach(module('browser.info'));
     beforeEach(inject(function (restServiceHandler, _config_) {
         rest = restServiceHandler;
         config = _config_;
