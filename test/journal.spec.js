@@ -1,7 +1,7 @@
 var bowser = 'bowser-data';
 
 describe('journal', function() {
-    var rest, config;
+    var rest, config, journaler;
 
     function request() {
         return rest.calls[0].args[0];
@@ -9,21 +9,25 @@ describe('journal', function() {
 
     beforeEach(module('journal'));
     beforeEach(module('browser.info'));
-    beforeEach(inject(function (restServiceHandler, _config_) {
+    beforeEach(inject(function (restServiceHandler, _config_, _journaler_) {
         rest = restServiceHandler;
         config = _config_;
+        journaler = _journaler_;
 
         config.baseUri = 'http://base-uri/';
         config.namespace = 'N';
     }));
 
-    describe('on module run', function() {
+    describe('journaler', function() {
         beforeEach(inject(function($location) {
             $location.path('/P');
         }));
 
         it('error was journaled', inject(function($location) {
-            window.onerror('M', 'U', 1);
+            journaler({from: 'javascript.error.reporter', payload: {
+                msg: 'M',
+                stack: 'M'
+            }});
 
             expect(request().params).toEqual({
                 method:'PUT',
@@ -44,11 +48,5 @@ describe('journal', function() {
                 withCredentials:true
             })
         }));
-
-        it('when logging error with stacktrace also journal it', inject(function() {
-            window.onerror('M', 'U', 1, 1, {stack:'S'});
-
-            expect(request().params.data.payload.stack).toEqual('S');
-        }))
     });
 });

@@ -1,13 +1,5 @@
 angular.module('journal', ['angular.usecase.adapter', 'rest.client', 'config', 'browser.info'])
-    .factory('journaler', ['restServiceHandler', 'usecaseAdapterFactory', 'config', 'browserInfo', '$location', JournalerFactory])
-    .run(['journaler', function(journaler) {
-        window.onerror = function(msg, url, lineNumber, column, obj) {
-            journaler({from:'javascript.error.reporter', payload: {
-                msg: msg,
-                stack: obj ? obj.stack : msg
-            }});
-        }
-    }]);
+    .factory('journaler', ['restServiceHandler', 'usecaseAdapterFactory', 'config', 'browserInfo', '$location', JournalerFactory]);
 
 function JournalerFactory(restServiceHandler, usecaseAdapterFactory, config, browserInfo, $location) {
     return function(args) {
