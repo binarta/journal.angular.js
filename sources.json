@@ -1,0 +1,5 @@
+{
+  "default": {
+    "journal": "bower_components/binarta.journal.angular/src/journal.js"
+  }
+}

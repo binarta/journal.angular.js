@@ -4,7 +4,7 @@ describe('journal', function() {
     var rest, config, journaler;
 
     function request() {
-        return rest.calls[0].args[0];
+        return rest.calls.first().args[0];
     }
 
     beforeEach(module('journal'));
